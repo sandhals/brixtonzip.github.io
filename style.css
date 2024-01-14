@@ -117,10 +117,6 @@ marquee {
     white-space:nowrap;
 }
 
-marquee > span{
-
-}
-
 marquee>*{
     color:var(--white);
 }
@@ -173,3 +169,22 @@ ul{
 li{
     margin-bottom:.2em;
 }
+
+.handwritten{
+    padding:3em 0;
+    text-align:center;
+    font-size:0.5em;
+    font-family:monospace;
+    opacity:.3;
+    line-height:1em;
+}.handwritten:hover{
+    opacity:1;
+    transition:1s;
+}.handwritten::after{
+    content:'♥️';
+    display:none;
+}.handwritten:hover::after{
+    display:inline-block;
+}
+
+

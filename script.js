@@ -17,15 +17,18 @@ function updateInfo() {
   if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 8 && hours < 16.5)) {
     statusMessage = '\u00A0AT\u00A0WORK\u00A0';
   } else if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 16.5 && hours < 18) ||
-             (currentTime.getDay() === 6 || currentTime.getDay() === 0 && hours >= 11 && hours < 13)) {
+             (currentTime.getDay() === 6 && hours >= 11 && hours < 13)|| 
+             (currentTime.getDay() === 0 && hours >= 11 && hours < 13)) {
     statusMessage = '\u00A0AT\u00A0THE\u00A0GYM\u00A0';
   } else if ((currentTime.getDay() >= 0 && currentTime.getDay() <= 4 && hours >= 23) ||
              (currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 0 && hours < 7) ||
-             (currentTime.getDay() === 6 || currentTime.getDay() === 0 && hours >= 2 && hours < 10)) {
+             (currentTime.getDay() === 6 && hours >= 2 && hours < 10)|| 
+             (currentTime.getDay() === 0 && hours >= 2 && hours < 10)) {
     statusMessage = '\u00A0SLEEPING\u00A0';
-  } else if ((currentTime.getDay() === 0 && hours >= 13 && hours < 23) ||
+  } else if ((currentTime.getDay() === 0 && hours >= 13 && hours < 21) ||
              (currentTime.getDay() === 5 && hours >= 18) ||
-             (currentTime.getDay() === 6 && hours < 2 || hours > 13)) {
+             (currentTime.getDay() === 6 && hours < 2) || 
+             (currentTime.getDay() === 6 && hours > 13)) {
     statusMessage = '\u00A0DOWNTOWN\u00A0';
   } else {
     statusMessage = '\u00A0AT\u00A0HOME\u00A0';

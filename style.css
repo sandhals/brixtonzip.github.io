@@ -20,10 +20,6 @@
     color:var(--black);
 }
 
-span{
-    white-space:pre-wrap;
-}
-
 body{
     width:100vw;
 }
@@ -111,6 +107,11 @@ marquee {
     display: flex;
     justify-content: space-between;
     padding-top:0.2em;
+    white-space:nowrap;
+}
+
+marquee > span{
+
 }
 
 marquee>*{

@@ -21,7 +21,7 @@
                 <pre id="sourceCode"></pre>
             </div>
                 <div class="header"> 
-                    <marquee>HEY! IT'S CURRENTLY <span id="seoulTime">!ERROR!</span> IN SEOUL SO I'M PROBABLY <span id="myStatus">!ERROR!</span></marquee>
+                    <marquee id="currentStatus">HEY! IT'S CURRENTLY <span id="currentTime">!ERROR!</span> IN SEOUL ON A <span id="weekday"></span> SO I'M PROBABLY <span id="myStatus">!ERROR!</span> RIGHT NOW</marquee>
                 </div>
                 <img src="dither1.png" alt="dithered gym selfie">
                 <div class="box">
@@ -30,17 +30,22 @@
                     </div>
                     <p>
                         <span class="pill opener">PROFILE</span>
-                        Hi, I'm Brixton! Welcome to my online zip folder. I was born in Canada, relocated to the countryside in Japan in 2016, and since 2021 have been living in Korea. I spend most of my free time learning languages, working out, building websites, reading, writing, and sketching. 
+                        Hi, I'm Brixton! Welcome to my zip folder. I was born in Canada, relocated to the countryside in Japan in 2016, and since 2021 have been living in Korea. I spend most of my free time learning languages, working out, building websites, reading, writing, and sketching. 
                     </p>
 
                     <p>
                         <span class="pill opener">SOCIALS</span>
-                        I mostly lurk but occasionally tweet at <a href="http://twitter.com/brixton">@brixton</a> on Twitter, I post physique at <a href="http://instagram.com/ydalir">@ydalir</a> on Insta, and I collect images, PDFs, and other digital bric-a-brac on <a href="are.na/brixton-s">Are.na</a>. 
+                        I mostly lurk but occasionally tweet at <a href="http://twitter.com/brixton">@brixton</a> on Twitter, I “post physique” at <a href="http://instagram.com/ydalir">@ydalir</a> on Insta, and I collect images, PDFs, and other digital bric-a-brac on <a href="are.na/brixton-s">Are.na</a>. 
                     </p>
-                    <p><span class="pill opener">CONTACT</span>Adipisci dolore consecte-tur ut officia pariatur aut fugit saepe nihil quisquam quasi error unde deserunt rem eius dolor, magni doloribus laudantium!
-                    Ratione ipsam commodi ab modi nisi nostrum veniam recusandae iste cum doloremque maiores illo saepe, quasi, quaerat necessitatibus quisquam aliquid sunt eos perferendis pariatur? Laborum facere sit inventore quaerat odit.
-                    Ratione rerum expedita iste tempore perspiciatis exercita-tionem odio nam praesentium. Dolor perspiciatis illum explicabo quam quidem ducimus soluta quae dignissimos officia laboriosam debitis culpa omnis, a consequatur. Harum, animi rem.
-                    Odio, distinctio modi praesentium amet eius laborum tempora cupidi-tate necessitatibus veritatis tenetur, blanditiis eaque adipisci quibusdam debitis sint beatae alias eligendi, deleniti dolores rem mollitia? Aliquid debitis repellendus tenetur suscipit.
+                    <p>
+                        <span class="pill opener">CONTACT</span>
+                        Adipisci dolore consecte-tur ut officia pariatur aut fugit saepe nihil quisquam quasi error unde deserunt rem eius dolor, magni doloribus laudantium. Ratione ipsam commodi ab modi nisi nostrum veniam recusandae iste cum doloremque maiores illo saepe, quasi, quaerat necessitatibus quisquam aliquid sunt eos perferendis pariatur? Laborum facere sit inventore quaerat odit.
+                    </p>
+                    <p>
+                        <span class="pill opener">FITNESS</span>
+                        Ratione rerum expedita iste tempore perspiciatis exercita-tionem odio nam praesentium. Dolor perspiciatis illum explicabo quam quidem ducimus soluta quae dignissimos officia laboriosam debitis culpa omnis, a consequatur. Harum, animi rem.
+                        Odio, distinctio modi praesentium amet eius laborum tempora cupidi-tate necessitatibus veritatis tenetur, blanditiis eaque adipisci quibusdam debitis sint beatae alias eligendi, deleniti dolores rem mollitia? Aliquid debitis repellendus tenetur suscipit.
+                    </p>
                     Eos voluptatem, dolorum temporibus velit reprehen-derit error necessitatibus blanditiis magnam veritatis corporis, aut accusamus autem fuga impedit eveniet. Enim distinctio tenetur molestias quaerat impedit amet excepturi quae fugit, odio alias.
                     Commodi non similique molestiae assumenda esse quibusdam unde consequatur explicabo iste. Numquam error soluta illo facilis ipsa quam, commodi odio? Reprehenderit dolore aspernatur temporibus necessitatibus eum commodi tenetur aut obcaecati.
                     Obcaecati totam nesciunt ducimus esse magnam illo saepe voluptatem vitae. Temporibus, maiores cum. Repellat eius nulla eos fugiat harum, maxime, nisi debitis vero aperiam blanditiis modi beatae nihil repudiandae mollitia!
@@ -61,48 +66,40 @@
     </div>
 </body>
 <script>
-// Function to update the time and status in Seoul
-function updateSeoulInfo() {
-  // Create a new Date object for Seoul, Korea (using time zone offset of +9 hours)
-  const seoulTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
-
-  // Get the hours, minutes, and seconds
-  const hours = seoulTime.getHours();
-  const minutes = seoulTime.getMinutes();
-  const seconds = seoulTime.getSeconds();
-
-  // Format the time as HH:mm:ss
-  const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-  // Log the formatted time to the console for debugging
-  console.log('Formatted Time:', formattedTime);
-
-  // Update the HTML element with the formatted time
-  document.getElementById('seoulTime').innerText = formattedTime;
-
-  // Initialize statusMessage with an empty string
+//Change timeZone to current location to provide updated status!!!
+const currentTimeZone = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Seoul' }).resolvedOptions().timeZone;
+const currentCity = currentTimeZone.split('/')[1];
+const currentTime = new Date(new Date().toLocaleString('en-US', { timeZone: currentTimeZone }));
+const hours = currentTime.getHours();
+const minutes = currentTime.getMinutes();
+const seconds = currentTime.getSeconds();
+const options = { weekday: 'long' };
+const today = currentTime.toLocaleDateString('en-US', options).toUpperCase();
+const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+//function for when in Seoul
+    if (currentCity === "Seoul") {
+    function updateSeoulInfo() {
+  document.getElementById('currentTime').innerText = formattedTime;
+  document.getElementById('weekday').innerText = today;
   let statusMessage = '';
 
-  // Determine the status based on the time
-  if ((hours >= 7 && hours < 16 && seoulTime.getDay() >= 1 && seoulTime.getDay() <= 5) ||
-      (hours >= 11 && hours < 13 && (seoulTime.getDay() === 0 || seoulTime.getDay() === 6))) {
-    statusMessage = 'AT WORK';
-  } else if ((hours >= 16 && hours < 18 && seoulTime.getDay() >= 1 && seoulTime.getDay() <= 5) ||
-             (hours >= 11 && hours < 13 && (seoulTime.getDay() === 1 || seoulTime.getDay() === 7))) {
-    statusMessage = 'WORKING OUT';
-  } else if ((hours >= 18 && hours < 23 && seoulTime.getDay() >= 1 && seoulTime.getDay() <= 5) ||
-             (hours >= 10 && hours < 11 && (seoulTime.getDay() === 0 || seoulTime.getDay() === 6))) {
-    statusMessage = 'AT HOME';
-  } else if ((hours >= 23 || (hours >= 0 && hours < 2 && seoulTime.getDay() === 6)) ||
-             (hours >= 1 && hours < 2 && seoulTime.getDay() === 7) ||
-             (hours >= 22 && hours < 23 && seoulTime.getDay() === 7)) {
-    statusMessage = 'SLEEPING';
-  } else if ((hours >= 13 && hours < 23) || (hours >= 0 && hours < 2)) {
-    statusMessage = 'DOWNTOWN';
-  }
-
-  // Log the status message to the console for debugging
-  console.log('Status Message:', statusMessage);
+// Determine the status based on the time
+       if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 8 && hours < 16.5)) {
+  statusMessage = 'AT WORK';
+} else if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 16.5 && hours < 18) ||
+           (currentTime.getDay() === 6 || currentTime.getDay() === 0 && hours >= 11 && hours < 13)) {
+  statusMessage = 'AT THE GYM';
+} else if ((currentTime.getDay() >= 0 && currentTime.getDay() <= 4 && hours >= 23) ||
+           (currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 0 && hours < 7) ||
+           (currentTime.getDay() === 6 || currentTime.getDay() === 0 && hours >= 2 && hours < 10)) {
+  statusMessage = 'SLEEPING';
+} else if ((currentTime.getDay() === 0 && hours >= 13 && hours < 23) ||
+           (currentTime.getDay() === 5 && hours >= 18) ||
+           (currentTime.getDay() === 6 && hours < 2 || hours > 13)) {
+  statusMessage = 'DOWNTOWN';
+} else {
+  statusMessage = 'AT HOME';
+}
 
   // Update the HTML element with the status message
   document.getElementById('myStatus').innerText = statusMessage;
@@ -114,6 +111,11 @@ setInterval(updateSeoulInfo, 1000);
 // Initial call to set the time and status when the page loads
 updateSeoulInfo();
 
+
+} else {
+        // If not, change the inner text of the element
+        document.getElementById("currentStatus").innerText = "I AM ON HOLIDAY IN " + currentCity.toUpperCase() + " RIGHT NOW WHERE IT'S CURRENTLY " + formattedTime; 
+    }
 
 
 

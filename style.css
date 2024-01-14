@@ -66,6 +66,7 @@ body{
     bottom:0;
     left:0;
     z-index: 2;
+    margin-top:-2em;
 }
 
 .test2{
@@ -139,9 +140,9 @@ img{
     border-top: solid 1px var(--black);
     border-left: solid 1px var(--black);
     border-right: solid 1px var(--black);
-    padding:5% 5%;
+    padding:5% 5% 3em 5%;
     width:calc(94%);
-    margin:1vh auto;
+    margin:1vh auto 0 auto;
     height:110%;
     box-sizing:border-box;
     position:relative;

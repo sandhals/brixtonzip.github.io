@@ -10,8 +10,13 @@
 }
 
 :root{
-    --black:rgb(0, 0, 0);
-    --white:rgb(255, 255, 255);
+    --black:rgb(24, 24, 24);
+    --white:rgb(247, 247, 247);
+}
+
+::selection{
+    background:var(--black);
+    color:var(--white);
 }
 
 *{
@@ -22,6 +27,7 @@
 
 body{
     width:100vw;
+    background:var(--white);
 }
 
 .site{
@@ -124,7 +130,7 @@ img{
     object-fit:cover;
     object-position: 50% 35%;
     mix-blend-mode: multiply;
-    background-color:var(--black)
+    background-color:var(--black)!important;
 }
 
 .box{
@@ -155,4 +161,14 @@ a{
 
 a:hover{
     color:salmon;
+}
+
+ul{
+    margin-top:-2.1em;
+    margin-left:6em;
+    list-style:none;
+}
+
+li{
+    margin-bottom:.2em;
 }

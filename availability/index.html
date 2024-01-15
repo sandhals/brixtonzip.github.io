@@ -6,12 +6,12 @@
     <title>Availability</title>
 </head>
 <body>
-    <h1>Availability</h1>
-    <p>I could probably do a little stream lesson during any of the following time windows:</p>
+    <h1>Demo Availability</h1>
+    <p>Hello, girls and gays 💜 I could probably sit down somewhere and do a little demo and lesson during one of these time windows this week 👨🏻‍💻</p>
     <ul id="availabilityList"></ul>
 
     <script>
-        function convertAndDisplayAvailability() {
+        function convertAndDisplayAvailability(timezoneOffset) {
             // Define your availability in Korean Standard Time
             const availability = {
                 Tuesday: "2:00PM-6:00PM",
@@ -22,9 +22,6 @@
                 Sunday: "2:00PM-12:00AM"
             };
 
-            // Get the viewer's timezone offset in minutes
-            const timezoneOffset = new Date().getTimezoneOffset();
-
             // Get the ul element to append list items
             const ul = document.getElementById("availabilityList");
 
@@ -32,12 +29,16 @@
             for (const day in availability) {
                 const [start, end] = availability[day].split('-');
                 
-                const startTime = convertTimeToViewerTimeZone(day, start, timezoneOffset);
-                const endTime = convertTimeToViewerTimeZone(day, end, timezoneOffset);
+                // Convert day to the viewer's timezone
+                const viewerDay = convertDayToViewerTimeZone(day, timezoneOffset);
+                
+                // Convert start and end times to the viewer's timezone
+                const startTime = convertTimeToViewerTimeZone(viewerDay, start, timezoneOffset);
+                const endTime = convertTimeToViewerTimeZone(viewerDay, end, timezoneOffset);
 
                 // Create a list item and append to the ul
                 const li = document.createElement("li");
-                li.textContent = `${day}: ${startTime}-${endTime}`;
+                li.textContent = `${viewerDay}: ${startTime}-${endTime}`;
                 ul.appendChild(li);
             }
         }
@@ -57,8 +58,21 @@
             return formattedTime;
         }
 
-        // Call the function when the page loads
-        convertAndDisplayAvailability();
+        function convertDayToViewerTimeZone(day, offset) {
+            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            // Find the index of the given day
+            const dayIndex = daysOfWeek.indexOf(day);
+
+            // Calculate the new day index after applying the timezone offset
+            const viewerDayIndex = (dayIndex - (offset / 60 / 24) + 7) % 7;
+
+            // Return the day name for the viewer's timezone
+            return daysOfWeek[viewerDayIndex];
+        }
+
+        // Call the function with a custom timezone offset for testing (e.g., GMT+02:00)
+        convertAndDisplayAvailability(-120);
     </script>
 </body>
 </html>

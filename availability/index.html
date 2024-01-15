@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Availability</title>
+</head>
+<body>
+    <h1>Availability</h1>
+    <p>I could probably do a little stream lesson during any of the following time windows:</p>
+    <ul id="availabilityList"></ul>
+
+    <script>
+        function convertAndDisplayAvailability() {
+            // Define your availability in Korean Standard Time
+            const availability = {
+                Tuesday: "2:00PM-6:00PM",
+                Wednesday: "2:00PM-10:30PM",
+                Thursday: "2:00PM-10:30PM",
+                Friday: "2:00PM-9:00PM",
+                Saturday: "11:00AM-7:00PM",
+                Sunday: "2:00PM-12:00AM"
+            };
+
+            // Get the viewer's timezone offset in minutes
+            const timezoneOffset = new Date().getTimezoneOffset();
+
+            // Get the ul element to append list items
+            const ul = document.getElementById("availabilityList");
+
+            // Iterate through the availability and convert times
+            for (const day in availability) {
+                const [start, end] = availability[day].split('-');
+                
+                const startTime = convertTimeToViewerTimeZone(day, start, timezoneOffset);
+                const endTime = convertTimeToViewerTimeZone(day, end, timezoneOffset);
+
+                // Create a list item and append to the ul
+                const li = document.createElement("li");
+                li.textContent = `${day}: ${startTime}-${endTime}`;
+                ul.appendChild(li);
+            }
+        }
+
+        function convertTimeToViewerTimeZone(day, time, offset) {
+            const [hours, minutes] = time.replace(/(AM|PM)/, '').split(':').map(Number);
+
+            // Convert time to milliseconds
+            const timeInMs = new Date(0, 0, 0, hours, minutes).getTime();
+
+            // Apply timezone offset
+            const convertedTimeInMs = timeInMs - (offset * 60 * 1000);
+
+            // Format the time
+            const formattedTime = new Date(convertedTimeInMs).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            return formattedTime;
+        }
+
+        // Call the function when the page loads
+        convertAndDisplayAvailability();
+    </script>
+</body>
+</html>

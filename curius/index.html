@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curius Saves</title>
+</head>
+<body>
+    <h1>Curius Saves</h1>
+    <ul>
+        {{range .}}
+            <li>{{.Title}} - <a href="{{.URL}}" target="_blank">{{.URL}}</a></li>
+        {{end}}
+    </ul>
+</body>
+</html>

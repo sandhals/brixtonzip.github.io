@@ -187,6 +187,7 @@ li{
 }
 
 .hidesource{
+    width:25em;
     padding:2em;
     text-align:center;
     font-size:0.6rem;
@@ -210,7 +211,7 @@ li{
         box-sizing: border-box;
         padding: 2em;
         font-family: monospace;
-        font-size: 0.9em;
+        font-size:0.55rem;
         white-space: pre-wrap;
         z-index: 1;
         filter: blur(1px);

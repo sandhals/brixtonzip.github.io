@@ -1,3 +1,25 @@
+<!--
+┌─────────────────────────────────────────────────────────┐
+│   WELCOME TO THE SOURCE CODE!                           │─┐
+│                                                         │ │
+│      Everything here was written with love and by hand  │ │
+│  in a text editor! No software, no web apps, just an    │ │
+|  idea and a bit of time and effort spent at cafes       | |
+|  around Seoul. If you've never worked with HTML before  | |
+|  and think it looks too hard, looks can be deceiving!   | |
+|  I encourage you to look up a tutorial online and to    | |
+|  try your hand at it. You might be surprised at what    | |
+|  you can create with even just a few minutes into your  | |
+|  study! A good place to start is my friend Laurel's     | |
+|  educational website http://veryinteractive.net/        | |
+|  You can find plenty of tutorials and ideas for first   | |
+|  projects there! Happy coding and happy reading~!       | |
+│                                                         │ │
+└─────────────────────────────────────────────────────────┘ │
+  └─────────────────────────────────────────────────────────┘
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +37,12 @@
     </style>
 </head>
 <body>
-    <div class="site">
+    <div class="container">
+        <div class="header"> 
+            <marquee id="currentStatus">IT'S CURRENTLY<span id="currentTime"></span>IN SEOUL ON A<span id="currentWeekday"></span>SO I'M PROBABLY<span id="myStatus"></span>RIGHT NOW</marquee>
+        </div>
         <div class="content">
-            <div class="paperbg">
-                <pre id="sourceCode"></pre>
-            </div>
-                <div class="header"> 
-                    <marquee id="currentStatus">IT'S CURRENTLY<span id="currentTime"></span>IN SEOUL ON A<span id="currentWeekday"></span>SO I'M PROBABLY<span id="myStatus"></span>RIGHT NOW</marquee>
-                </div>
+                
                 <img src="dither1.png" alt="dithered gym selfie">
                 <div class="box">
                     <div class="menu">
@@ -44,19 +64,89 @@
                     <div class="text">
                         <span class="pill opener">NOW</span>
                 <ul class="text">
-                    <li><a>Reading:</a> <i>Dostoyevsky Reads Hegel in Siberia and Bursts into Tears</i> by Lázló Földényi</li>
-                    <li><a>Split:</a> Legs, Chest, Back, Legs, Chest, Back, Rest</li>
-                    <li><a>Language Focus:</a> Chinese (first 1000 words!!)</li>
+                    <li><u>Reading:</u> <i>Dostoyevsky Reads Hegel in Siberia and Bursts into Tears</i> by Lázló Földényi</li>
+                    <li><u>Split:</u> Legs, Chest, Back, Legs, Chest, Back, Rest</li>
+                    <li><u>Language Focus:</u> Chinese (first 1000 words!!)</li>
                 </ul> 
             </div>
 
-                        <div class="handwritten">this site was handmade with love </div>
+                        <div class="showsource">this site was handmade with love </div>
                 </div>
         </div>
+        <div class="sourcecode" id="sourceCodeContainer"></div>
         <div class="footer">
             <h1 class="test2">brixton.zip</h1>
         </div>
     </div>
 </body>
 <script src="script.js?v=1"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var content = document.querySelector('.content');
+            var sourceCodeContainer = document.querySelector('.sourcecode');
+            var showSource = document.querySelector('.showsource');
+            var container = document.querySelector('.container');
+    
+            function showSourceCode() {
+                sourceCodeContainer.style.filter = 'blur(0px)';
+                content.style.display = 'none';
+                sourceCodeContainer.style.position = 'static';
+                container.style.overflowY = 'visible';
+    
+                var hideSource = document.createElement('div');
+                hideSource.className = 'hidesource';
+                hideSource.innerText = 'this site was handmade with love 💙';
+                hideSource.addEventListener('click', hideSourceCode);
+                document.body.appendChild(hideSource);
+            }
+    
+            function hideSourceCode() {
+                sourceCodeContainer.style.filter = 'blur(1px)';
+                content.style.display = 'block';
+                sourceCodeContainer.style.position = 'absolute';
+                container.style.overflow = 'hidden';
+
+                window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
+
+                var hideSource = document.querySelector('.hidesource');
+                if (hideSource) {
+                    hideSource.remove();
+                }
+            }
+
+            showSource.addEventListener('click', showSourceCode);
+        });
+
+        window.onload = function () {
+            var sourceCodeContainer = document.getElementById('sourceCodeContainer');
+
+            fetch('index.html')
+                .then(response => response.text())
+                .then(sourceCode => {
+                    sourceCodeContainer.innerText = sourceCode;
+                })
+                .catch(error => {
+                    console.error('Error fetching source code:', error);
+                });
+        };
+    </script>
 </html>
+
+<!-- Thanks for reading! 🙈 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -35,9 +35,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="preload" as="font" href="/fonts/apple_garamond/AppleGaramond-Light.ttf" type="font/ttf" crossorigin="anonymous">
     <link rel="preload" as="font" href="/fonts/apple_garamond/AppleGaramond-LightItalic.ttf" type="font/ttf" crossorigin="anonymous">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    </style>
 </head>
 <body>
     <div class="container">
@@ -46,99 +43,51 @@
         </div>
         <div class="content">
                 
-                <img src="dither1.png" alt="dithered gym selfie">
+                <img src="me.png" alt="dithered gym selfie">
                 <div class="box">
-                    <div class="menu">
-
-                    </div>
                     <p class="text">
                         <span class="pill opener">PROFILE</span>
                         Hi, I'm Brixton! I was born in Canada, relocated to the Japanese countryside in 2016, and since 2021 have been living in Korea. I spend most of my free time learning languages, working out, building websites, reading, writing, and sketching. Welcome to my online zip folder. 
                     </p>
-
                     <p class="text">
                         <span class="pill opener">SOCIALS</span>
                         I mostly lurk (but occasionally tweet) at <a href="http://twitter.com/brixton">@brixton</a> on Twitter, I “post physique” at <a href="http://instagram.com/ydalir">@ydalir</a> on Insta, and I collect images, PDFs, and other digital bric-a-brac on <a href="http://are.na/brixton-s">Are.na</a>. I am also <a href="https://network.urbit.org/~sattex-ballet">~sattex-ballet</a> on Urbit. 
                     </p>
                     <p class="text">
-                    <span class="pill opener">LANGUAGE</span>
-                    Foreign languages are something I've been interested in for as long as I can remember, and are probably something I will dedicate a major part of my leisure time to til the day I die. Having spent some time in Japan and Korea, my Japanese and Korean are easily my most proficient L2 languages, Norwegian and French both trail a bit further behind, and Mandarin Chinese is my latest serious endeavour as of January 2024. In the past, I've dabbled in Polish and Hungarian, and I see myself returning to them both in the foreseeable future. After those, who knows what's next! 
+                        <span class="pill opener">LANGUAGE</span>
+                        Foreign languages are something I've been interested in for as long as I can remember, and are probably something I will dedicate a major part of my leisure time to til the day I die. Having spent some time in Japan and Korea, my Japanese and Korean are easily my most proficient L2 languages, <a href="s/h/h" id="shh">N</a>orwegian and French both trail a bit further behind, and Mandarin Chinese is my latest serious endeavour as of January 2024. In the past, I've dabbled in Polish and Hungarian, and I see myself returning to them both in the foreseeable future. After those, who knows what's next! 
                     </p>
+
+
+<!--- (°ロ°) ! Psst... Hey! Hey, you!! I usually only 
+    tell my friends this, but go back to the site homepage 
+            and click the "N" in Norwegian for a secret surprise...  
+                I know it looks like there's nothing there but... 
+                    Just go click it! (╭ರ_•́) -->
+                    
+
                     <div class="text">
                         <span class="pill opener">NOW</span>
-                <ul class="text">
-                    <li><u>Reading:</u> <i>Dostoyevsky Reads Hegel in Siberia and Bursts into Tears</i> by Lázló Földényi</li>
-                    <li><u>Split:</u> Legs, Chest, Back, Legs, Chest, Back, Rest</li>
-                    <li><u>Language Focus:</u> Chinese (first 1000 words!!)</li>
-                    <li><u>Working on:</u> A lyric essay on bodybuilding</li>
-                    <li><u>Fragrance:</u> A friend of mine who works in perfume kindly mixed me a knockoff version of Santal 33 and I have been wearing that!</li>
-                    
-                </ul> 
-            </div>
-
-                        <div class="showsource">this site was handmade with love </div>
+                        <ul class="text">
+                            <li><u>Reading:</u> <i>Dostoyevsky Reads Hegel in Siberia and Bursts into Tears</i> by Lázló Földényi</li>
+                            <li><u>Split:</u> Legs, Chest, Back, Legs, Chest, Back, Rest</li>
+                            <li><u>Language Focus:</u> Chinese (first 1000 words!!)</li>
+                            <li><u>Working on:</u> A lyric essay on bodybuilding</li>
+                            <li><u>Fragrance:</u> A friend of mine who works in perfume kindly mixed me a knockoff version of Santal 33 and I have been wearing that!</li> 
+                            <li id="last-modified" style="font-style:italic; font-size:80%; padding-top:0.5em;"></li>
+                            <script>document.getElementById('last-modified').innerHTML = 'Last updated : '+ document.lastModified;</script>
+                        </ul> 
+                    </div>
+                    <div class="showsource">this site was handmade with love </div>
                 </div>
         </div>
         <div class="sourcecode" id="sourceCodeContainer"></div>
         <div class="footer">
-            <h1 class="test2">brixton.zip</h1>
+            <h1 class="titlemark">brixton.zip</h1>
         </div>
     </div>
 </body>
 <script src="script.js?v=1"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-            var content = document.querySelector('.content');
-            var sourceCodeContainer = document.querySelector('.sourcecode');
-            var showSource = document.querySelector('.showsource');
-            var container = document.querySelector('.container');
-    
-            function showSourceCode() {
-                sourceCodeContainer.style.filter = 'blur(0px)';
-                content.style.display = 'none';
-                sourceCodeContainer.style.position = 'static';
-                container.style.overflowY = 'visible';
-    
-                var hideSource = document.createElement('div');
-                hideSource.className = 'hidesource';
-                hideSource.innerText = 'this site was handmade with love 💙';
-                hideSource.addEventListener('click', hideSourceCode);
-                document.body.appendChild(hideSource);
-
-                window.scrollTo(0, 0);
-            }
-    
-            function hideSourceCode() {
-                sourceCodeContainer.style.filter = 'blur(1px)';
-                content.style.display = 'block';
-                sourceCodeContainer.style.position = 'absolute';
-                container.style.overflow = 'hidden';
-
-                window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
-
-
-                var hideSource = document.querySelector('.hidesource');
-                if (hideSource) {
-                    hideSource.remove();
-                }
-            }
-
-            showSource.addEventListener('click', showSourceCode);
-        });
-
-        window.onload = function () {
-            var sourceCodeContainer = document.getElementById('sourceCodeContainer');
-
-            fetch('index.html')
-                .then(response => response.text())
-                .then(sourceCode => {
-                    sourceCodeContainer.innerText = sourceCode;
-                })
-                .catch(error => {
-                    console.error('Error fetching source code:', error);
-                });
-        };
-    </script>
 </html>
 
 <!-- Thanks for reading! 🙈 -->

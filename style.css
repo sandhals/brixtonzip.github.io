@@ -213,7 +213,7 @@ li{
 }
 
 .showsource{
-    padding:1em 0 5em 0;
+    padding:1em 0 3.5rem 0;
     text-align:center;
     font-size:0.6rem;
     font-family:monospace;
@@ -239,7 +239,7 @@ li{
     line-height:1em;
     cursor:alias;
     position: fixed;
-    bottom: 10.27rem;
+    bottom: 10.2rem;
     left: 50%;
     transform:translateX(-50%);
     background:var(--white);

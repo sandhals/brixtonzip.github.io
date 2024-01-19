@@ -1,3 +1,4 @@
+
     // Simulating loading JSON data from a local file
     // Replace 'api-response.json' with the actual file name
     fetch('https://curius.app/api/users/3954/searchLinks')
@@ -17,7 +18,7 @@
 
         const linksContainer = document.getElementById('links-container');
         const isRecentCurius = linksContainer.classList.contains('recentcurius');
-        let displayCount = isRecentCurius ? 3 : links.length;
+        let displayCount = isRecentCurius ? 5 : links.length;
 
         // Check if 'links' is an array before using 'forEach'
         if (Array.isArray(links)) {
@@ -54,7 +55,7 @@
 
                 const linkElement = document.createElement('div');
                 linkElement.innerHTML = `
-                <p class="curiusitem"><a class="curiuslink" href="${link.link}" target="_blank">${link.title}</a> <span class="curiusdate">${displayText}</span></p>
+                    <p class="curiusitem"><a class="curiuslink" href="${link.link}" target="_blank">${link.title}</a> <span class="curiusdate">${displayText}</span></p>
                     
                     <hr>
                 `;

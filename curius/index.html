@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Links</title>
+</head>
+<body>
+    <div id="links-container"></div>
+
+<!-- ... (previous HTML code) ... -->
+<!-- ... (previous HTML code) ... -->
+
+<script>
+    // Simulating loading JSON data from a local file
+    // Replace 'api-response.json' with the actual file name
+    fetch('api-response.json')
+        .then(response => response.json())
+        .then(data => {
+            // Display the structured content on the page
+            displayLinks(data.links);
+        })
+        .catch(error => {
+            console.error('Error fetching local data:', error);
+        });
+
+    // Function to display links on the page
+    function displayLinks(links) {
+        // Log the 'links' variable to the console for debugging
+        console.log('Links variable:', links);
+
+        const linksContainer = document.getElementById('links-container');
+
+
+        // Check if 'links' is an array before using 'forEach'
+        if (Array.isArray(links)) {
+            // Iterate through each link and create HTML elements to display them
+            links.forEach(link => {
+                const linkElement = document.createElement('div');
+                linkElement.innerHTML = `
+                    <p><a href="${link.link}" target="_blank">${link.title}</a></p>
+                    <p>Created Date: ${link.createdDate}</p>
+                    <hr>
+                `;
+                linksContainer.appendChild(linkElement);
+            });
+        } else {
+            console.error('Error: The loaded data is not an array.');
+        }
+    }
+</script>
+
+<!-- ... (remaining HTML code) ... -->
+
+<!-- ... (remaining HTML code) ... -->
+
+</body>
+</html>

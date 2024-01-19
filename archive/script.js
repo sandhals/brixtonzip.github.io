@@ -1,3 +1,4 @@
+ 
     // Simulating loading JSON data from a local file
     // Replace 'api-response.json' with the actual file name
     fetch('https://curius.app/api/users/3954/searchLinks')

@@ -5,6 +5,7 @@
 .curiuslink{
  font-family:'Garamond';
  font-size:0.95rem;
+ text-overflow: ellipsis;
 }
 
 .curiusdate{
@@ -18,16 +19,13 @@ color:rgba(25, 25, 25, 0.5)
 }
 
 .curiusitem {
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px; /* Set the desired width for curiusitem */
-    transition:500ms;
+    text-overflow:ellipsis;
+    position: relative;
 }
 
-.curiusitem:hover {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-    transition:500ms;
+.curiusitem {
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
 }

@@ -1,9 +1,12 @@
-
     // Simulating loading JSON data from a local file
     // Replace 'api-response.json' with the actual file name
     fetch('https://curius.app/api/users/3954/searchLinks')
         .then(response => response.json())
         .then(data => {
+            // Remove the loading placeholder
+            const linksContainer = document.getElementById('links-container');
+            linksContainer.innerHTML = '';
+
             // Display the structured content on the page
             displayLinks(data.links);
         })

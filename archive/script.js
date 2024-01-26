@@ -69,3 +69,39 @@
             console.error('Error: The loaded data is not an array.');
         }
     }
+
+// Function to update data.json
+async function updateData() {
+    try {
+      // Fetch data from the API
+      const response = await fetch('https://curius.app/api/users/3954/searchLinks');
+      const newData = await response.json();
+  
+      // Display links on the page using the fetched data
+      displayLinks(newData.links);
+  
+      // Fetch the existing data from data.json
+      const existingDataResponse = await fetch('data.json');
+      const existingData = await existingDataResponse.json();
+  
+      // Update the existing data with new data
+      const updatedData = { ...existingData, ...newData };
+  
+      // Save the updated data back to data.json
+      await fetch('data.json', {
+        method: 'PUT', // Assuming the server supports PUT requests
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+  
+      console.log('Data updated successfully');
+    } catch (error) {
+      console.error('Error updating data:', error.message);
+    }
+  }
+  
+  // Call the updateData function when the page loads
+  window.addEventListener('load', updateData);
+  

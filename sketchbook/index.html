@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>💬 language</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css?v=2">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" href="../fonts/apple_garamond/AppleGaramond-Light.ttf" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" as="font" href="../fonts/apple_garamond/AppleGaramond-LightItalic.ttf" type="font/ttf" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="header"> 
+            <marquee id="currentStatus">IT'S CURRENTLY<span id="currentTime"></span>IN SEOUL ON A<span id="currentWeekday"></span>SO I'M PROBABLY<span id="myStatus"></span>RIGHT NOW</marquee>
+        </div>
+        <div class="content">
+                    <div class="box">
+                        <img src="pg00.jpg" alt="" class="sketch">
+                        <p class="sketchmenu">
+                            <select id="sketchSelect" onchange="changeSketchFromDropdown(this)">
+                                <option value="0">📔 00</option>
+                                <option value="1">🚙 01</option>
+                                <option value="2">🏙 02</option>
+                                <option value="3">🤕 03</option>
+                                <option value="4">🐱 04</option>
+                                <option value="5">🧐 05</option>
+                                <option value="6">🔥 06</option>
+                                <option value="7">🏜️ 07</option>
+                                <option value="8">🐯 08</option>
+                                <option value="9">🪶 09</option>
+                                <option value="10">🍁 10</option>
+                                <option value="11">🧜🏻‍♀️ 11</option>
+                                <option value="12">🎐 12</option>
+                                <option value="13">🏋🏻‍♂️ 13</option>
+                                <option value="14">🗻 14</option>
+                                <option value="15">🪲 15</option>
+                                <option value="16">⛪️ 16</option>
+                                <option value="17">🪆 17</option>
+                                <option value="18">🦣 18</option>
+                                <option value="19">🌈 19</option>
+                                <option value="20">🌀 20</option>
+                                <option value="21">⛩️ 21</option>
+                                <option value="22">🇨🇦 22</option>
+                                <option value="23">🦋 23</option>
+                                <option value="24">🌶️ 24</option>
+
+                            </select>
+                            <button id="prevBtn" onclick="changeSketch(-1)"><</button>
+                            <button id="nextBtn" onclick="changeSketch(1)">></button>
+                        </p>
+                        <span class="description">Welcome to my sketchbook! As a child, I used to spend a lot of time drawing with my brother, but I promptly started falling out of the habit after I graduated from high school. In 2022, I bought this sketchbook in hopes of resurrecting the habit.</span>
+                </div>
+        </div>
+        <div class="sourcecode" id="sourceCodeContainer"></div>
+        <div class="footer">
+            <div class="titlemark"><a href="..">brixton.zip</a></div>
+    </div>
+
+
+    <script>
+        var sketchNumber = 0;
+    
+        // Function to change the sketch from the dropdown menu
+        function changeSketchFromDropdown(selectElement) {
+            sketchNumber = parseInt(selectElement.value);
+            updateSketch();
+        }
+    
+        // Function to change the sketch
+        function changeSketch(delta) {
+            sketchNumber += delta;
+            updateSketch();
+        }
+
+        // Function to change the sketch from the dropdown menu
+function changeSketchFromDropdown(selectElement) {
+    sketchNumber = parseInt(selectElement.value);
+    updateSketch();
+
+    // Update the selected attribute based on the current sketchNumber
+    var options = selectElement.options;
+    for (var i = 0; i < options.length; i++) {
+        options[i].selected = options[i].value === sketchNumber.toString();
+    }
+}
+
+    
+        // Function to update the sketch based on the current sketchNumber
+        function updateSketch() {
+            // Format sketchNumber to have leading zeros for single digits
+            var formattedSketchNumber = sketchNumber < 10 ? '0' + sketchNumber : sketchNumber;
+    
+            // Check if the file exists before updating the image source
+            var imgPath = 'pg' + formattedSketchNumber + '.jpg';
+            if (fileExists(imgPath)) {
+                document.querySelector('.sketch').src = imgPath;
+    
+                // Dynamically set the selected option in the dropdown
+                var dropdown = document.getElementById('sketchSelect');
+                for (var i = 0; i < dropdown.options.length; i++) {
+                    if (dropdown.options[i].value === formattedSketchNumber) {
+                        dropdown.selectedIndex = i;
+                        break;
+                    }
+                }
+            } else {
+                // Handle the case where the file doesn't exist (e.g., show an error message)
+                alert('That is the end of the sketchbook so far!');
+            }
+        }
+    
+        // Function to check if a file exists
+        function fileExists(url) {
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send();
+            return http.status !== 404;
+        }
+    </script>
+    
+    
+    
+</body>
+<script src="../script.js?v=2"></script>
+
+
+</html>
+
+<!-- Thanks for reading! 🙈 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

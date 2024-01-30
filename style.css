@@ -114,8 +114,8 @@ body{
     transition:400ms ease-in-out;
 }
 
-p:hover > a{
-    color:blue;
+.hometext:hover > a {
+    color:blue!important;
     transition:300ms;
 }
 

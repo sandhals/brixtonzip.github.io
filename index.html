@@ -26,7 +26,7 @@
     <title>🙋🏻‍♂️ brixton.zip</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png?v=2">
@@ -51,8 +51,21 @@
             <marquee id="currentStatus">IT'S CURRENTLY<span id="currentTime"></span>IN SEOUL ON A<span id="currentWeekday"></span>SO I'M PROBABLY<span id="myStatus"></span>RIGHT NOW</marquee>
         </div>
         <div class="content">
-                
-                <img src="me.png" alt="dithered gym selfie">
+                <div style="position: relative">
+                    <img src="me.png" alt="dithered gym selfie">                   
+                    <input type="checkbox" id="open">
+                    <div class="iframe-container">
+                        <iframe src="unzip" style="position:absolute;top:0;left:0;height:100%;width:100%;background:rgba(255, 255, 255, 0.932);" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <style>
+                .unzip:hover:before{content:'UNZIP?';font-family:monospace;font-size:0.7em;}
+                .iframe-container{display:none;}
+                #open:checked + .iframe-container {display:block;}
+                #open{z-index:9999;filter: opacity(0.8);accent-color:blue;font-family:monospace;position:absolute;bottom:6px;right:4px;display:inline;opacity:0.8;color:black;}
+                #open:hover:after{content:'UNZIP?';margin-left:calc(-3rem - 2px);margin-bottom:6px;}
+                #open:checked:hover:after{content:'ZIP?';color:blue;margin-left:calc(-2rem - 2px);margin-bottom:6px;}
+                </style>
                 <div class="box">
                     <p class="hometext">
                         <span class="pill opener">PROFILE</span>
@@ -74,7 +87,7 @@
                 I know it looks like there's nothing there but... 
                     Just go click it! (╭ರ_•́) -->
 
-                    
+
                     <div class="hometext">
                         <span class="pill opener">ARTICLES</span>
                         <ul>

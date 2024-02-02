@@ -285,3 +285,9 @@ li{
 .titlemark>*:hover{
     text-decoration:none!important;
 }
+
+.jptext{
+    font-size:0.8em!important;
+    font-family: serif;
+    font-weight:100;
+}

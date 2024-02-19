@@ -225,6 +225,7 @@ li{
 }.showsource:hover{
     opacity:1;
     transition:1s;
+    color:blue;
 }.showsource::after{
     content:'🩶';
     display:none;
@@ -233,6 +234,7 @@ li{
 }
 
 .hidesource{
+    color:blue;
     width:25em;
     padding:2em;
     text-align:center;

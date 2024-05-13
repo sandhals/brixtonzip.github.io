@@ -14,9 +14,9 @@ function updateInfo() {
   let statusMessage = '';
 
 // Various statuses depending on the time
-  if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 8 && hours < 16.5)) {
+  if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 9 && hours < 18)) {
     statusMessage = '\u00A0AT\u00A0WORK\u00A0';
-  } else if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 16.5 && hours < 18) ||
+  } else if ((currentTime.getDay() >= 1 && currentTime.getDay() <= 5 && hours >= 18 && hours < 20) ||
              (currentTime.getDay() === 6 && hours >= 11 && hours < 13)|| 
              (currentTime.getDay() === 0 && hours >= 11 && hours < 13)) {
     statusMessage = '\u00A0AT\u00A0THE\u00A0GYM\u00A0';
@@ -26,7 +26,7 @@ function updateInfo() {
              (currentTime.getDay() === 0 && hours >= 2 && hours < 10)) {
     statusMessage = '\u00A0SLEEPING\u00A0';
   } else if ((currentTime.getDay() === 0 && hours >= 13 && hours < 21) ||
-             (currentTime.getDay() === 5 && hours >= 18) ||
+             (currentTime.getDay() === 5 && hours >= 20) ||
              (currentTime.getDay() === 6 && hours < 2) || 
              (currentTime.getDay() === 6 && hours > 13)) {
     statusMessage = '\u00A0DOWNTOWN\u00A0';

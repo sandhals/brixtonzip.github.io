@@ -1,0 +1,86 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:serif;
+    box-sizing:border-box;
+}
+
+body{
+    background:white;
+}
+
+.site{
+    border: 1px solid black;
+    margin: 10px auto;
+    max-width:700px;
+    padding-bottom:20px;
+}
+
+
+.bird{
+    height:40px;
+    filter:grayscale(1);
+}
+
+#birdheader{
+    position:absolute;
+    left:0;
+    margin-top:-3vh;
+    background-image:url("birds.jpg");
+    background-position:center;
+    background-size:cover;
+    width:100vw;
+    height:80vh;
+    z-index:0;
+}
+
+a{
+    color:limegreen;
+}
+
+.site-title{
+    font-family:sans-serif;
+    color:limegreen;
+    -webkit-text-stroke: black 1px;
+    font-size:50px;
+    text-align:center;
+    z-index:10;
+    margin-top:10vh;
+}
+
+.box{
+    width:30rem;
+    height:auto;
+    background-color:lightblue;
+}
+
+.content{
+    margin-top:78vh;
+}
+
+.questionnaire>*{
+    font-family:monospace;
+}
+
+.questionnaire{
+    padding-bottom:30px;
+}
+
+.guests{
+    padding:1vw 6vw;
+    font-family:monospace;
+}
+
+.name{
+    padding:1vw 6vw;
+    font-family:monospace;
+}
+
+.q{
+    background:limegreen;
+    padding:1vw 6vw;
+}
+
+.a{
+    padding:0.5em 4.5em;
+}

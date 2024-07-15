@@ -35,12 +35,12 @@ body{
 }
 
 a{
-    color:limegreen;
+    color:lime;
 }
 
 .site-title{
     font-family:sans-serif;
-    color:limegreen;
+    color:lime;
     -webkit-text-stroke: black 1px;
     font-size:50px;
     text-align:center;
@@ -68,7 +68,23 @@ a{
 
 .guests{
     padding:1vw 6vw;
-    font-family:monospace;
+    display:flex;
+}
+
+.guests>*{
+    height:100px;
+    height:100px;
+    margin-right:-20px;
+}
+
+.brixton{
+  filter: brightness(52%) hue-rotate(255deg) saturate(159%);
+}
+.jisu{
+    filter: brightness(52%) hue-rotate(172deg) saturate(159%);
+}
+.nari{
+    filter: brightness(85%) hue-rotate(302deg) saturate(159%);
 }
 
 .name{
@@ -77,7 +93,7 @@ a{
 }
 
 .q{
-    background:limegreen;
+    background:lime;
     padding:1vw 6vw;
 }
 

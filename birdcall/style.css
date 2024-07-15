@@ -69,9 +69,10 @@ a{
 .guests{
     padding:1vw 6vw;
     display:flex;
+    width:100%;
 }
 
-.guests>*{
+.guests>*>*{
     height:100px;
     height:100px;
     margin-right:-20px;

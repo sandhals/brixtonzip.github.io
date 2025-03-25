@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Times</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            font-style: italic;
+            font-weight: normal;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+        }
+        
+        .time-row {
+            display: grid;
+            grid-template-columns: 30px 120px 150px 1fr;
+            align-items: center;
+            margin-bottom: 40px;
+            font-size: 1.5rem;
+            gap: 10px;
+        }
+        
+        .symbol {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .time-value {
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .blank-time {
+            border-bottom: 2px solid black;
+            width: 80px;
+            height: 1.5rem;
+        }
+        
+        .time-name {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        
+        .time-description {
+            font-size: 1.5rem;
+        }
+        
+        #location-info {
+            margin-top: 60px;
+            font-style: italic;
+        }
+        
+        .loading {
+            color: #888;
+            font-style: italic;
+        }
+
+        .source{
+            position:absolute;
+            left:10px;
+            bottom:10px;
+            text-decoration:none;
+            color:gray;
+        }
+        .source:hover{
+            color:black;
+            transition:1s;
+        }
+    </style>
+</head>
+<body>
+    <a class="source" href="https://www.are.na/block/11796022">idea from Yatu on Are.na</a>
+    <h1>Current times</h1>
+    
+    <div class="time-row">
+        <div class="symbol">+</div>
+        <div id="intoset-value" class="blank-time"></div>
+        <div class="time-name">intoset</div>
+        <div class="time-description">Time since last sunset</div>
+    </div>
+    
+    <div class="time-row">
+        <div class="symbol">+</div>
+        <div id="intosun-value" class="blank-time"></div>
+        <div class="time-name">intosun</div>
+        <div class="time-description">Time spent in sun</div>
+    </div>
+    
+    <div class="time-row">
+        <div class="symbol">-</div>
+        <div id="tilset-value" class="blank-time"></div>
+        <div class="time-name">tilset</div>
+        <div class="time-description">Time left in the sun</div>
+    </div>
+    
+    <div class="time-row">
+        <div class="symbol">-</div>
+        <div id="tilsun-value" class="blank-time"></div>
+        <div class="time-name">tilsun</div>
+        <div class="time-description">Time until next sunrise</div>
+    </div>
+    
+    <div id="location-info">Getting your location...</div>
+    
+    <script>
+        // Function to format time in hours:minutes
+        function formatTime(hours, minutes) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}`;
+        }
+        
+        // Function to convert minutes to hours:minutes format
+        function minutesToHoursMinutes(totalMinutes) {
+            const hours = Math.floor(totalMinutes / 60);
+            const minutes = Math.floor(totalMinutes % 60);
+            return formatTime(hours, minutes);
+        }
+        
+        // Function to calculate difference between two times in minutes
+        function getTimeDifferenceInMinutes(time1, time2) {
+            return Math.abs(time1.getTime() - time2.getTime()) / (1000 * 60);
+        }
+        
+        // Function to check if current time is between sunrise and sunset
+        function isDaytime(sunriseTime, sunsetTime, currentTime) {
+            return currentTime >= sunriseTime && currentTime <= sunsetTime;
+        }
+        
+        // Function to update all the time displays
+        function updateTimes(sunrise, sunset) {
+            const now = new Date();
+            const locationInfo = document.getElementById('location-info');
+            const intosetValue = document.getElementById('intoset-value');
+            const intosunValue = document.getElementById('intosun-value');
+            const tilsetValue = document.getElementById('tilset-value');
+            const tilsunValue = document.getElementById('tilsun-value');
+            
+            // Create Date objects for sunrise and sunset
+            const sunriseToday = new Date(sunrise);
+            const sunsetToday = new Date(sunset);
+            
+            // Tomorrow's sunrise (add 1 day to today's sunrise)
+            const sunriseTomorrow = new Date(sunriseToday);
+            sunriseTomorrow.setDate(sunriseTomorrow.getDate() + 1);
+            
+            // Yesterday's sunset (subtract 1 day from today's sunset)
+            const sunsetYesterday = new Date(sunsetToday);
+            sunsetYesterday.setDate(sunsetYesterday.getDate() - 1);
+            
+            // Check if it's currently daytime or nighttime
+            const isDayTime = isDaytime(sunriseToday, sunsetToday, now);
+            
+            // Always calculate all values, but display only the relevant ones
+            
+            // DAYTIME CALCULATIONS
+            // Time spent in sun (intosun) - time since sunrise
+            const intosunMinutes = getTimeDifferenceInMinutes(sunriseToday, now);
+            
+            // Time left in the sun (tilset) - time until sunset
+            const tilsetMinutes = getTimeDifferenceInMinutes(now, sunsetToday);
+            
+            // NIGHTTIME CALCULATIONS
+            // Time since last sunset (intoset)
+            let lastSunset;
+            if (now < sunriseToday) {
+                // Before sunrise today, use yesterday's sunset
+                lastSunset = sunsetYesterday;
+            } else {
+                // After sunset today, use today's sunset
+                lastSunset = sunsetToday;
+            }
+            const intosetMinutes = getTimeDifferenceInMinutes(lastSunset, now);
+            
+            // Time until next sunrise (tilsun)
+            let nextSunrise;
+            if (now < sunriseToday) {
+                // Before sunrise today, use today's sunrise
+                nextSunrise = sunriseToday;
+            } else {
+                // After sunset today, use tomorrow's sunrise
+                nextSunrise = sunriseTomorrow;
+            }
+            const tilsunMinutes = getTimeDifferenceInMinutes(now, nextSunrise);
+            
+            // Update display based on day/night
+            if (isDayTime) {
+                // Display daytime values
+                intosunValue.textContent = minutesToHoursMinutes(intosunMinutes);
+                intosunValue.className = 'time-value';
+                
+                tilsetValue.textContent = minutesToHoursMinutes(tilsetMinutes);
+                tilsetValue.className = 'time-value';
+                
+                // Hide nighttime values
+                intosetValue.textContent = '';
+                intosetValue.className = 'blank-time';
+                
+                tilsunValue.textContent = '';
+                tilsunValue.className = 'blank-time';
+            } else {
+                // Display nighttime values
+                intosetValue.textContent = minutesToHoursMinutes(intosetMinutes);
+                intosetValue.className = 'time-value';
+                
+                tilsunValue.textContent = minutesToHoursMinutes(tilsunMinutes);
+                tilsunValue.className = 'time-value';
+                
+                // Hide daytime values
+                intosunValue.textContent = '';
+                intosunValue.className = 'blank-time';
+                
+                tilsetValue.textContent = '';
+                tilsetValue.className = 'blank-time';
+            }
+            
+            // Update location info with sunrise and sunset times
+            const sunriseHours = sunriseToday.getHours();
+            const sunriseMinutes = sunriseToday.getMinutes();
+            const sunsetHours = sunsetToday.getHours();
+            const sunsetMinutes = sunsetToday.getMinutes();
+            
+            locationInfo.textContent = `Based on your location • Sunrise: ${formatTime(sunriseHours, sunriseMinutes)} • Sunset: ${formatTime(sunsetHours, sunsetMinutes)}`;
+        }
+        
+        // Function to get sunrise and sunset data from API
+        async function getSunData(latitude, longitude) {
+            try {
+                const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&date=today&formatted=0`);
+                const data = await response.json();
+                
+                if (data.status === 'OK') {
+                    // Convert to local time
+                    const sunriseUTC = new Date(data.results.sunrise);
+                    const sunsetUTC = new Date(data.results.sunset);
+                    
+                    // Update the UI with the calculated times
+                    updateTimes(sunriseUTC, sunsetUTC);
+                    
+                    // Update times every minute
+                    setInterval(() => updateTimes(sunriseUTC, sunsetUTC), 60000);
+                } else {
+                    document.getElementById('location-info').textContent = 'Failed to get sunrise/sunset data. Please try again.';
+                }
+            } catch (error) {
+                document.getElementById('location-info').textContent = 'Error fetching sun data: ' + error.message;
+            }
+        }
+        
+        // Get user's geolocation
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        
+                        // Fetch location name using reverse geocoding
+                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`)
+                            .then(response => response.json())
+                            .then(data => {
+                                let locationName = 'your location';
+                                if (data.address) {
+                                    if (data.address.city) {
+                                        locationName = data.address.city;
+                                    } else if (data.address.town) {
+                                        locationName = data.address.town;
+                                    } else if (data.address.village) {
+                                        locationName = data.address.village;
+                                    }
+                                }
+                                document.getElementById('location-info').textContent = `Getting sun data for ${locationName}...`;
+                            })
+                            .catch(error => {
+                                console.error('Error getting location name:', error);
+                            });
+                        
+                        // Get sun data using coordinates
+                        getSunData(latitude, longitude);
+                    },
+                    (error) => {
+                        let errorMessage;
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = 'Location access denied. Please allow location access to see accurate sun times.';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = 'Location information is unavailable.';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = 'Location request timed out.';
+                                break;
+                            default:
+                                errorMessage = 'An unknown error occurred.';
+                        }
+                        document.getElementById('location-info').textContent = errorMessage;
+                        
+                        // Use default location (New York) for demonstration
+                        getSunData(40.7128, -74.0060);
+                    }
+                );
+            } else {
+                document.getElementById('location-info').textContent = 'Geolocation is not supported by this browser.';
+                // Use default location for demonstration
+                getSunData(40.7128, -74.0060);
+            }
+        }
+        
+        // Initialize on page load
+        window.onload = getLocation;
+    </script>
+</body>
+</html>
